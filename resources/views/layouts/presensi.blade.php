@@ -29,7 +29,7 @@
     </div>
     <!-- * loader -->
 
-
+    @yield('header')
 
     <!-- App Capsule -->
     <div id="appCapsule">
@@ -41,7 +41,6 @@
 @include('layouts.bottomNav')
 
 @include('layouts.script')
-
 </body>
 
 </html>
