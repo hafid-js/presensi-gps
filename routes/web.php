@@ -18,3 +18,4 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index']);
+Route::post('/proseslogin', [App\Http\Controllers\AuthController::class, 'proseslogin']);
