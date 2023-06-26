@@ -101,7 +101,7 @@
                 color: 'red',
                 fillColor: '#f03',
                 fillOpacity: 0.5,
-                radius: 20
+                radius: 4000
             }).addTo(map);
         }
 

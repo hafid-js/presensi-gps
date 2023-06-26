@@ -53,7 +53,7 @@ class PresensiController extends Controller
             'lokasi_in' => $lokasi
         ];
 
-        if ($radius > 20) {
+        if ($radius > 4000) {
             echo "error|Maaf Anda Berada Diluar Radius, Jarak Anda " . $radius . " meter dari Kantor|radius";
         } else {
             if ($cek > 0) {
