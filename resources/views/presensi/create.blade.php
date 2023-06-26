@@ -63,6 +63,9 @@
     <audio id="notifikasi_out">
         <source src="{{ asset("assets/sound/notifikasi_out.mp3") }}" type="audio/mpeg">
     </audio>
+    <audio id="radius_sound">
+        <source src="{{ asset("assets/sound/radius.mp3") }}" type="audio/mpeg">
+    </audio>
 @endsection
 
 @push('myscript')
@@ -70,6 +73,7 @@
     <script>
         var notifikasi_in = document.getElementById('notifikasi_in');
         var notifikasi_out = document.getElementById('notifikasi_out');
+        var radius_sound = document.getElementById('radius_sound');
         Webcam.set({
             height: 480,
             width: 640,
@@ -93,7 +97,7 @@
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             }).addTo(map);
             var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
-            var circle = L.circle([position.coords.latitude, position.coords.longitude], {
+            var circle = L.circle([-6.181734600971108, 106.89365728219268], {
                 color: 'red',
                 fillColor: '#f03',
                 fillOpacity: 0.5,
@@ -135,9 +139,12 @@
                             })
                             setTimeout("location.href='/dashboard'", 3000);
                         } else {
+                            if (status[2] == "radius") {
+                                radius_sound.play();
+                            }
                             Swal.fire({
                                 title: 'Error',
-                                text: 'Maaf Gagal Absen, Silahkan Hubungi IT',
+                                text: status[1],
                                 icon: 'error'
                             })
                         }
