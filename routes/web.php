@@ -32,5 +32,7 @@ Route::middleware(['auth:karyawan'])->group(function() {
     Route::get('/proseslogout', [App\Http\Controllers\AuthController::class, 'proseslogout']);
     Route::get('/presensi/create', [App\Http\Controllers\PresensiController::class, 'create']);
     Route::post('/presensi/store', [App\Http\Controllers\PresensiController::class, 'store']);
+    Route::get('/editprofile', [App\Http\Controllers\PresensiController::class, 'editprofile']);
+    Route::post('/presensi/{nik}/updateprofile', [App\Http\Controllers\PresensiController::class, 'updateprofile']);
 
 });

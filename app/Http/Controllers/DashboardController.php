@@ -31,6 +31,7 @@ class DashboardController extends Controller
         $leaderboard = DB::table('presensi')
         ->join('karyawan','presensi.nik', '=', 'karyawan.nik')
         ->where('tgl_presensi', $hariini)
+        ->orderBy('jam_in')
         ->get();
 
         $namabulan = ["","Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];

@@ -4,7 +4,14 @@
 <div class="section" id="user-section">
     <div id="user-detail">
         <div class="avatar">
+            @if(!empty(Auth::guard('karyawan')->user()->foto))
+            @php
+                $path = Storage::url('uploads/karyawan/'.Auth::guard('karyawan')->user()->foto);
+            @endphp
+            <img src="{{ url($path) }}" alt="avatar" class="imaged w64 rounded">
+            @else
             <img src="assets/img/sample/avatar/avatar1.jpg" alt="avatar" class="imaged w64 rounded">
+            @endif
         </div>
         <div id="user-info">
             <h2 id="user-name">{{ Auth::guard('karyawan')->user()->nama_lengkap }}</h2>
@@ -195,8 +202,11 @@
                         <div class="item">
                             <img src="assets/img/sample/avatar/avatar1.jpg" alt="image" class="image">
                             <div class="in">
-                                <div>{{ $d->nama_lengkap }}</div>
-                                <span class="text-muted">{{ $d->jabatan }}</span>
+                            <div class="">
+                                <b>{{ $d->nama_lengkap }}</b><br>
+                                <small class="text-muted">{{ $d->jabatan }}</small>
+                            </div>
+                                <span class="badge {{ $d->jam_in < "07:00" ? "bg-success" : "bg-danger" }}">{{ $d->jam_in }}</span>
                             </div>
                         </div>
                     </li>
