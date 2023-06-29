@@ -45,7 +45,7 @@
                 </div>
                 @if ($d->status_approved == 0)
                 <span class="badge badge-warning">Waiting</span>
-                @elseif ($d->status_approval == 1)
+                @elseif ($d->status_approved == 1)
                 <span class="badge badge-success">Approved</span>
                 @else
                 <span class="badge badge-warning">Decline</span>

@@ -46,4 +46,11 @@ class DashboardController extends Controller
 
         return view('dashboard.dashboard', compact('presensihariini','historibulanini','namabulan','bulanini','tahunini','rekappresensi','leaderboard', 'rekapizin'));
     }
+
+    public function dashboardadmin(){
+        return view('dashboard.dashboardadmin');
+    }
 }
+
+
+
