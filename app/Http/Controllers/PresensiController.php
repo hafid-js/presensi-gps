@@ -171,6 +171,15 @@ class PresensiController extends Controller
         return view('presensi.gethistori', compact('histori'));
     }
 
+
+    public function izin(){
+        return view('presensi.izin');
+    }
+
+    public function buatizin(){
+        return view('presensi.buatizin');
+    }
+
 }
 
 
