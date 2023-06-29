@@ -59,4 +59,6 @@ Route::middleware(['auth:user'])->group(function () {
     Route::get('/proseslogoutadmin', [App\Http\Controllers\AuthController::class, 'proseslogoutadmin']);
 
     Route::get('/panel/dashboardadmin', [App\Http\Controllers\DashboardController::class, 'dashboardadmin']);
+
+    Route::get('/karyawan', [App\Http\Controllers\KaryawanController::class, 'index']);
 });
