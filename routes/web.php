@@ -61,4 +61,17 @@ Route::middleware(['auth:user'])->group(function () {
     Route::get('/panel/dashboardadmin', [App\Http\Controllers\DashboardController::class, 'dashboardadmin']);
 
     Route::get('/karyawan', [App\Http\Controllers\KaryawanController::class, 'index']);
+    Route::post('/karyawan/store', [App\Http\Controllers\KaryawanController::class, 'store']);
+    Route::post('/karyawan/edit', [App\Http\Controllers\KaryawanController::class, 'edit']);
+    Route::post('/karyawan/{nik}/update', [App\Http\Controllers\KaryawanController::class, 'update']);
+    Route::post('/karyawan/{nik}/delete', [App\Http\Controllers\KaryawanController::class, 'delete']);
+
+
+    Route::get('/departemen', [App\Http\Controllers\DepartemenController::class, 'index']);
+    Route::post('/departemen/edit', [App\Http\Controllers\DepartemenController::class, 'edit']);
+    Route::post('/departemen/{kode_dept}/update', [App\Http\Controllers\DepartemenController::class, 'update']);
+    Route::post('/departemen/{kode_dept}/delete', [App\Http\Controllers\DepartemenController::class, 'delete']);
+
+    Route::get('/presensi/monitoring', [App\Http\Controllers\PresensiController::class, 'monitoring']);
+    Route::post('/getpresensi', [App\Http\Controllers\PresensiController::class, 'getpresensi']);
 });

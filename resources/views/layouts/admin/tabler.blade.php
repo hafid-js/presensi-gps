@@ -45,6 +45,7 @@
     <link href="{{ asset('tabler/dist/css/tabler-payments.min.css?1685973381') }}" rel="stylesheet"/>
     <link href="{{ asset('tabler/dist/css/tabler-vendors.min.css?1685973381') }}" rel="stylesheet"/>
     <link href="{{ asset('tabler/dist/css/demo.min.css?1685973381') }}" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />
     <style>
       @import url('https://rsms.me/inter/inter.css');
       :root {
@@ -74,7 +75,11 @@
     <script src="{{ asset('tabler/dist/libs/jsvectormap/dist/maps/world.js?1685973381') }}" defer></script>
     <script src="{{ asset('tabler/dist/libs/jsvectormap/dist/maps/world-merc.js?1685973381') }}" defer></script>
     <!-- Tabler Core -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ asset('tabler/dist/js/tabler.min.js?1685973381') }}" defer></script>
     <script src="{{ asset('tabler/dist/js/demo.min.js?1685973381') }}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
+    @stack('myscript')
   </body>
 </html>
