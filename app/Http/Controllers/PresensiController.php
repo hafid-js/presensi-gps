@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
 
 class PresensiController extends Controller
@@ -219,6 +220,18 @@ class PresensiController extends Controller
         ->get();
         return view('presensi.getpresensi', compact('presensi'));
     }
+
+
+    public function tampilkanpeta(Request $request) {
+        $id = $request->id;
+        $presensi = DB::table('presensi')->where('id', $id)
+        ->join('karyawan','presensi.nik','=','karyawan.nik')
+        ->first();
+        return view('presensi.showmap', compact('presensi'));
+    }
+
+
+
 
 }
 
