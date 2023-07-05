@@ -215,7 +215,7 @@ class PresensiController extends Controller
         ->select('presensi.*','nama_lengkap','nama_dept')
         ->join('karyawan','presensi.nik','=','karyawan.nik')
         ->join('departemen','karyawan.kode_dept','=','departemen.kode_dept')
-        ->where('tanggal', $tanggal)
+        ->where('tgl_presensi', $tanggal)
         ->get();
         return view('presensi.getpresensi', compact('presensi'));
     }
