@@ -19,7 +19,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="form-group">
-                    <select name="bulan" id="bulan" class="form-control">
+                    <select name="bulan" id="bulan" class="form-select">
                         @for ($i=1; $i<=12; $i++)
                         <option value="{{ $i }}" {{ date("m") == $i ? 'selected' : '' }}>{{ $namabulan[$i] }}</option>
                         @endfor
@@ -30,7 +30,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="form-group">
-                    <select name="tahun" id="tahun" class="form-control">
+                    <select name="tahun" id="tahun" class="form-select">
                         <option value="">Tahun</option>
                         @php
                             $tahunmulai = 2022;
