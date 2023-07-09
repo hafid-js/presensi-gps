@@ -77,6 +77,9 @@ Route::middleware(['auth:user'])->group(function () {
     Route::get('/presensi/laporan', [App\Http\Controllers\PresensiController::class, 'laporan']);
     Route::post('/presensi/cetaklaporan', [App\Http\Controllers\PresensiController::class, 'cetaklaporan']);
     Route::get('/presensi/rekap', [App\Http\Controllers\PresensiController::class, 'rekap']);
-
     Route::post('/presensi/cetakrekap', [App\Http\Controllers\PresensiController::class, 'cetakrekap']);
+
+
+    Route::get('/konfigurasi/lokasikantor', [App\Http\Controllers\KonfigurasiController::class, 'lokasikantor']);
+    Route::post('/konfigurasi/updatelokasikantor', [App\Http\Controllers\KonfigurasiController::class, 'updatelokasikantor']);
 });

@@ -95,6 +95,7 @@
             var lok = lokasi_kantor.split(",");
             var lat_kantor = lok[0];
             var long_kantor = lok[1];
+            var radius = "{{ $lok_kantor->radius }}"
             var map = L.map('map').setView([position.coords.latitude, position.coords.longitude], 19);
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19,
@@ -105,7 +106,7 @@
                 color: 'red',
                 fillColor: '#f03',
                 fillOpacity: 0.5,
-                radius: {{ $lok_kantor->radius }}
+                radius: radius
             }).addTo(map);
         }
 
