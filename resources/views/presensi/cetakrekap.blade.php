@@ -105,6 +105,8 @@
             <th rowspan="2">Nik</th>
             <th rowspan="2">Nama Karyawan</th>
             <th colspan="31">Tanggal</th>
+            <th rowspan="2">TH</th>
+            <th rowspan="2">TT</th>
         </tr>
         <tr>
             <?php
@@ -120,15 +122,32 @@
             <td>{{ $d->nik }}</td>
             <td>{{ $d->nama_lengkap }}</td>
             <?php
+            $totalhadir = 0;
+            $totalterlambat = 0;
             for($i = 1; $i <= 31; $i++){
                 $tgl = "tgl_".$i;
+                if(empty($d->$tgl)) {
+                    $totalhadir += 0;
+                    $hadir = ['',''];
+                } else {
+                    $hadir = explode("-",$d->$tgl);
+                    $totalhadir += 1;
+                    if($hadir[0] > "07:00:00") {
+                        $totalterlambat += 1;
+                    }
+                }
 
-                $hadir = explode("-",$d->$tgl);
+
                 ?>
-            <td>{{ $hadir[0] }}</td>
+            <td>
+                <span style="color: {{ $hadir[0] > "07:00:00" ? "red" : "" }}">{{ $hadir[0] }}</span>
+                <span style="color: {{ $hadir[1] < "16:00:00" ? "red" : "" }}">{{ $hadir[1] }}</span>
+            </td>
             <?php
             }
             ?>
+                        <td>{{ $totalhadir }}</td>
+                        <td>{{ $totalterlambat }}</td>
         </tr>
         @endforeach
     </table>
