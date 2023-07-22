@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pengajuanizin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -311,11 +312,30 @@ class PresensiController extends Controller
     }
 
 
-    public function izinsakit() {
-        $izinsakit = DB::table('pengajuan_izin')
-        ->join('karyawan','pengajuan_izin.nik', '=', 'karyawan.nik')
-        ->orderBy('tgl_izin','asc')
-        ->get();
+    public function izinsakit(Request $request) {
+      $query = Pengajuanizin::query();
+      $query->select('id','tgl_izin','pengajuan_izin.nik','nama_lengkap','jabatan','status','status_approved','keterangan');
+      $query->join('karyawan','pengajuan_izin.nik', '=' , 'karyawan.nik');
+
+      if(!empty($request->dari) && !empty($request->sampai)) {
+        $query->whereBetween('tgl_izin', [$request->dari, $request->sampai]);
+      }
+
+      if(!empty($request->nik)) {
+        $query->where('pengajuan_izin.nik', $request->nik);
+      }
+
+      if(!empty($request->nama_lengkap)) {
+         $query->where('nama_lengkap',
+         'like','%' . $request->nama_lengkap . '%');
+      }
+
+      if($request->status_approved === "0" || $request->status_approved === "1" || $request->status_approved === "2") {
+        $query->where('status_approved', $request->status_approved);
+      }
+
+      $query->orderby('tgl_izin', 'desc');
+      $izinsakit = $query->paginate(10);
         return view('presensi.izinsakit', compact('izinsakit'));
     }
 
@@ -344,8 +364,11 @@ class PresensiController extends Controller
         }
     }
 
-
-
+    public function cekpengajuanizin(Request $request) {
+        $tgl_izin = $request->tgl_izin;
+        $nik = Auth::guard('karyawan')->user()->nik;
+        $cek = DB::table('pengajuan_izin')->where('nik', $nik)->where('tgl_izin', $tgl_izin)->count();return $cek;
+    }
 
 
 }
