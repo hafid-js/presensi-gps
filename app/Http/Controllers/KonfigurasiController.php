@@ -29,5 +29,9 @@ class KonfigurasiController extends Controller
         }
     }
 
+    public function jamkerja(){
+        return view('konfigurasi.jamkerja');
+    }
+
 
 }
