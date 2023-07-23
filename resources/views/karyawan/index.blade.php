@@ -104,6 +104,7 @@
                                                 <th>No. HP</th>
                                                 <th>Foto</th>
                                                 <th>Departemen</th>
+                                                <th>Cabang</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -128,6 +129,7 @@
 
                                                     </td>
                                                     <td>{{ $d->nama_dept }}</td>
+                                                    <td>{{ $d->kode_cabang }}</td>
                                                     <td>
                                                         <div class="btn-group">
                                                             <a href="#" class="edit" nik="{{ $d->nik }}">
@@ -277,8 +279,20 @@
                                 <select name="kode_dept" id="kode_dept" class="form-select">
                                     <option value="">Departemen</option>
                                     @foreach ($departemen as $d)
-                                        <option {{ Request('kode_dept') == $d->kode_dept ? 'selected' : '' }}
+                                        <option
                                             value="{{ $d->kode_dept }}">{{ $d->nama_dept }}</option>
+                                    @endforeach
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <select name="kode_cabang" id="kode_cabang" class="form-select">
+                                    <option value="">Cabang</option>
+                                    @foreach ($cabang as $d)
+                                        <option
+                                            value="{{ $d->kode_cabang }}">{{ strtoupper($d->nama_cabang) }}</option>
                                     @endforeach
 
                                 </select>
@@ -368,6 +382,7 @@
                 var jabatan = $("#jabatan").val();
                 var no_hp = $("#no_hp").val();
                 var kode_dept = $("frmKaryawan").find("#kode_dept").val();
+                var kode_cabang = $("frmKaryawan").find("#kode_cabang").val();
                 if (nik == "") {
                     Swal.fire({
                         title: 'Warning!',
@@ -416,6 +431,17 @@
                         confirmButtonText: 'OK'
                     }).then(() => {
                         $("#kode_dept").focus();
+                    });
+                    return false;
+                }
+                else if (kode_cabang == "") {
+                    Swal.fire({
+                        title: 'Warning!',
+                        text: 'Kode Cabang Harus Diisi',
+                        icon: 'warning',
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        $("#kode_cabang").focus();
                     });
                     return false;
                 }
