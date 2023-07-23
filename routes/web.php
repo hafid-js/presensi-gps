@@ -69,6 +69,7 @@ Route::middleware(['auth:user'])->group(function () {
 
 
     Route::get('/departemen', [App\Http\Controllers\DepartemenController::class, 'index']);
+    Route::post('/departemen/store', [App\Http\Controllers\DepartemenController::class, 'store']);
     Route::post('/departemen/edit', [App\Http\Controllers\DepartemenController::class, 'edit']);
     Route::post('/departemen/{kode_dept}/update', [App\Http\Controllers\DepartemenController::class, 'update']);
     Route::post('/departemen/{kode_dept}/delete', [App\Http\Controllers\DepartemenController::class, 'delete']);

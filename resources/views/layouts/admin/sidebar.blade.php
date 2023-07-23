@@ -167,6 +167,9 @@
                   <a class="dropdown-item {{ request()->is(['departemen']) ? 'active' : '' }}" href="/departemen">
                     Departemen
                   </a>
+                  <a class="dropdown-item {{ request()->is(['cabang']) ? 'active' : '' }}" href="/cabang">
+                    Kantor Cabang
+                  </a>
               </div>
             </div>
           </li>
