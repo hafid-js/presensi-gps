@@ -85,6 +85,11 @@ Route::middleware(['auth:user'])->group(function () {
     Route::get('/presensi/{id}/batalkanizinsakit', [App\Http\Controllers\PresensiController::class, 'batalkanizinsakit']);
 
 
+    Route::get('/cabang', [App\Http\Controllers\CabangController::class, 'index']);
+    Route::post('/cabang/store', [App\Http\Controllers\CabangController::class, 'store']);
+    Route::post('/cabang/edit', [App\Http\Controllers\CabangController::class, 'edit']);
+    Route::post('/cabang/update', [App\Http\Controllers\CabangController::class, 'update']);
+    Route::post('/cabang/{kode_cabang}/delete', [App\Http\Controllers\CabangController::class, 'delete']);
 
 
     Route::get('/konfigurasi/lokasikantor', [App\Http\Controllers\KonfigurasiController::class, 'lokasikantor']);
