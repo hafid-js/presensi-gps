@@ -21,7 +21,7 @@
         }
 
         #map {
-            height: 200px;
+            height: 300px;
             border-radius: 5px;
         }
     </style>
@@ -91,16 +91,16 @@
 
         function successCallback(position) {
             lokasi.value = position.coords.latitude + "," + position.coords.longitude;
-            var lokasi_kantor = "{{ $lok_kantor->lokasi_kantor }}";
+            var lokasi_kantor = "{{ $lok_kantor->lokasi_cabang }}";
             var lok = lokasi_kantor.split(",");
             var lat_kantor = lok[0];
             var long_kantor = lok[1];
-            var radius = "{{ $lok_kantor->radius }}"
+            var radius = "{{ $lok_kantor->radius_cabang }}"
             var map = L.map('map').setView([position.coords.latitude, position.coords.longitude], 19);
-            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19,
-                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            }).addTo(map);
+            googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
+        maxZoom: 20,
+        subdomains:['mt0','mt1','mt2','mt3']
+}).addTo(map);
             var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
             var circle = L.circle([lat_kantor, long_kantor], {
                 color: 'red',
