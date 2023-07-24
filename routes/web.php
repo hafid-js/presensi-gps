@@ -95,4 +95,8 @@ Route::middleware(['auth:user'])->group(function () {
     Route::get('/konfigurasi/lokasikantor', [App\Http\Controllers\KonfigurasiController::class, 'lokasikantor']);
     Route::post('/konfigurasi/updatelokasikantor', [App\Http\Controllers\KonfigurasiController::class, 'updatelokasikantor']);
     Route::get('/konfigurasi/jamkerja', [App\Http\Controllers\KonfigurasiController::class, 'jamkerja']);
+    Route::post('/konfigurasi/storejamkerja', [App\Http\Controllers\KonfigurasiController::class, 'storejamkerja']);
+    Route::post('/konfigurasi/editjamkerja', [App\Http\Controllers\KonfigurasiController::class, 'editjamkerja']);
+    Route::post('/konfigurasi/updatejamkerja', [App\Http\Controllers\KonfigurasiController::class, 'updatejamkerja']);
+    Route::post('/konfigurasi/{kode_jam_kerja}/delete', [App\Http\Controllers\KonfigurasiController::class, 'delete']);
 });
