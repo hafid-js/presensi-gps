@@ -98,4 +98,12 @@ class KonfigurasiController extends Controller
         }
     }
 
+
+    public function setjamkerja($nik) {
+
+        $karyawan = DB::table('karyawan')->where('nik', $nik)->first();
+        $jamkerja = DB::table('jam_kerja')->orderBy('nama_jam_kerja')->get();
+        return view('konfigurasi.setjamkerja', compact('karyawan','jamkerja'));
+    }
+
 }
