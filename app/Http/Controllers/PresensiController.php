@@ -81,6 +81,11 @@ class PresensiController extends Controller
         $jarak = $this->distance($latitudekantor, $longitudekantor, $latitudeuser, $longitudeuser);
         $radius = round($jarak["meters"]);
 
+        $namahari = $this->gethari();
+        $jamkerja = DB::table('konfigurasi_jamkerja')
+        ->join('jam_kerja', 'konfigurasi_jamkerja.kode_jam_kerja', '=' ,'jam_kerja.kode_jam_kerja')
+        ->where('nik', $nik)->where('hari', $namahari)->first();
+
         $cek = DB::table('presensi')->where('tgl_presensi', $tgl_presensi)->where('nik', $nik)->count();
 
         if ($cek > 0) {
@@ -107,6 +112,9 @@ class PresensiController extends Controller
             echo "error|Maaf Anda Berada Diluar Radius, Jarak Anda " . $radius . " meter dari Kantor|radius";
         } else {
             if ($cek > 0) {
+                if ($jam < $jamkerja->jam_pulang) {
+                    echo "error|Maaf Belum Waktunya Pulang|out";
+                }
                 $data_pulang = [
                     'jam_out' => $jam,
                     'foto_out' => $fileName,
@@ -120,20 +128,27 @@ class PresensiController extends Controller
                     echo "error|Maaf Gagal Absen, Hubungi Tim It|out";
                 }
             } else {
-                $data = [
-                    'nik' => $nik,
-                    'tgl_presensi' => $tgl_presensi,
-                    'jam_in' => $jam,
-                    'foto_in' => $fileName,
-                    'lokasi_in' => $lokasi
-                ];
-                $simpan = DB::table('presensi')->insert($data);
-                if ($simpan) {
-                    echo "success|Terimakasih, Selamat Bekerja|in";
-                    Storage::put($file, $image_base64);
+                if($jam < $jamkerja->awal_jam_masuk) {
+                    echo "error|Maaf Belum Waktunya Melakukan Presensi|in";
+                } else if ($jam > $jamkerja->akhir_jam_masuk){
+                    echo "error|Maaf Waktu Untuk Presensi Sudah Habis|in";
                 } else {
-                    echo "error|Maaf Gagal absen, Hubungi Tim It|in";
+                    $data = [
+                        'nik' => $nik,
+                        'tgl_presensi' => $tgl_presensi,
+                        'jam_in' => $jam,
+                        'foto_in' => $fileName,
+                        'lokasi_in' => $lokasi
+                    ];
+                    $simpan = DB::table('presensi')->insert($data);
+                    if ($simpan) {
+                        echo "success|Terimakasih, Selamat Bekerja|in";
+                        Storage::put($file, $image_base64);
+                    } else {
+                        echo "error|Maaf Gagal absen, Hubungi Tim It|in";
+                    }
                 }
+
             }
         }
     }
