@@ -138,7 +138,8 @@ class PresensiController extends Controller
                         'tgl_presensi' => $tgl_presensi,
                         'jam_in' => $jam,
                         'foto_in' => $fileName,
-                        'lokasi_in' => $lokasi
+                        'lokasi_in' => $lokasi,
+                        'kode_jam_kerja' => $jamkerja->kode_jam_kerja
                     ];
                     $simpan = DB::table('presensi')->insert($data);
                     if ($simpan) {
@@ -283,7 +284,8 @@ class PresensiController extends Controller
     {
         $tanggal = $request->tanggal;
         $presensi = DB::table('presensi')
-            ->select('presensi.*', 'nama_lengkap', 'nama_dept')
+            ->select('presensi.*', 'nama_lengkap', 'departemen.kode_dept','jam_masuk','nama_jam_kerja')
+            ->leftJoin('jam_kerja','presensi.kode_jam_kerja','=','jam_kerja.kode_jam_kerja')
             ->join('karyawan', 'presensi.nik', '=', 'karyawan.nik')
             ->join('departemen', 'karyawan.kode_dept', '=', 'departemen.kode_dept')
             ->where('tgl_presensi', $tanggal)
