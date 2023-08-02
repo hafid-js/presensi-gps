@@ -27,7 +27,7 @@
     <td>{{ $d->nik }}</td>
     <td>{{ $d->nama_lengkap }}</td>
     <td>{{ $d->kode_dept }}</td>
-    <td>{{ $d->nama_jam_kerja }}</td>
+    <td>{{ $d->nama_jam_kerja }} ( {{ $d->jam_masuk }} s/d {{ $d->jam_pulang }})</td>
     <td>{{ $d->jam_in }}</td>
     <td>
         <img src="{{ url($foto_in) }}" alt="" class="avatar">
