@@ -72,6 +72,8 @@ class KaryawanController extends Controller
             // dd($e);
             if ($e->getCode() == 23000) {
                 $message = "Data dengan Nik " . $nik . " Sudah Ada";
+            } else {
+                $message = "Hubungi IT";
             }
             return Redirect::back()->with(['warning' => 'Data Gagal Disimpan ' . $message]);
         }

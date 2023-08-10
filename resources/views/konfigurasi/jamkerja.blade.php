@@ -89,7 +89,7 @@
                                                                     </path>
                                                                     <path d="M16 5l3 3"></path>
                                                                 </svg></a>
-                                                            <form action="/konfigurasi/{{ $d->kode_jam_kerja }}/delete"
+                                                            <form action="/konfigurasi/jamkerja/{{ $d->kode_jam_kerja }}/delete"
                                                                 style="margin-left:5px;" method="POST">
                                                                 @csrf
                                                                 <a class="btn-primary delete-confirm">
@@ -294,6 +294,9 @@
 @push('myscript')
     <script>
         $(function() {
+
+            $("#awal_jam_masuk, #jam_masuk, #akhir_jam_masuk, #jam_pulang").mask("00-00");
+
             $(".edit").click(function() {
                 var kode_jam_kerja = $(this).attr('kode_jam_kerja');
                 $.ajax({

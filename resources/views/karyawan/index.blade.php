@@ -224,7 +224,7 @@
                                             <path d="M19 11l0 2"></path>
                                         </svg>
                                     </span>
-                                    <input type="text" value="" id="nik" class="form-control"
+                                    <input type="text" maxlength="5" value="" id="nik" class="form-control"
                                         placeholder="Nik" name="nik">
                                 </div>
                                 <div class="input-icon mb-3">
@@ -343,6 +343,9 @@
 @push('myscript')
     <script>
         $(function() {
+            $("#nik").mask("00000");
+            $("#no_hp").mask("000000000000");
+
             $(".edit").click(function() {
                 var nik = $(this).attr('nik');
                 $.ajax({

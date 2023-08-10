@@ -90,7 +90,7 @@ class KonfigurasiController extends Controller
         }
     }
 
-    public function delete($kode_jam_kerja){
+    public function deletejamkerja($kode_jam_kerja){
         $delete = DB::table('jam_kerja')->where('kode_jam_kerja', $kode_jam_kerja)->delete();
         if($delete) {
             return Redirect::back()->with(['success' => 'Data Berhasil Dihapus']);
@@ -163,6 +163,9 @@ class KonfigurasiController extends Controller
             return redirect('/karyawan')->with(['warning' => 'Jam Kerja Gagal Di Setting']);
         }
     }
+
+
+
 
 
 }
