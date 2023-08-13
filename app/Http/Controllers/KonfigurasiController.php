@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Setjamkerja;
+use App\Models\Setjamkerjadept;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -165,7 +166,56 @@ class KonfigurasiController extends Controller
     }
 
 
+    public function jamkerjadept(){
+        $jamkerjadept = DB::table('konfigurasi_jk_dept')
+        ->join('cabang','konfigurasi_jk_dept.kode_cabang', '=', 'cabang.kode_cabang')
+        ->join('departemen', 'konfigurasi_jk_dept.kode_dept', '=', 'departemen.kode_dept')
+        ->get();
+        return view('konfigurasi.jamkerjadept', compact('jamkerjadept'));
+    }
 
+    public function createjamkerjadept(){
+        $jamkerja = DB::table('jam_kerja')->orderBy('kode_jam_kerja')->get();
+        $cabang = DB::table('cabang')->get();
+        $departemen = DB::table('departemen')->get();
+        return view('konfigurasi.createjamkerjadept',compact('jamkerja','cabang','departemen'));
+    }
+
+
+
+
+    public function storejamkerjadept(Request $request) {
+        $kode_cabang = $request->kode_cabang;
+        $kode_dept = $request->kode_dept;
+        $hari = $request->hari;
+        $kode_jam_kerja = $request->kode_jam_kerja;
+        $kode_jk_dept = "J" . $kode_cabang . $kode_dept;
+
+        DB::beginTransaction();
+        try {
+            //menyimpan data ke table konfigurasi_jk_dept
+            DB::table('konfigurasi_jk_dept')->insert([
+                'kode_jk_dept' => $kode_jk_dept,
+                'kode_cabang' => $kode_cabang,
+                'kode_dept' => $kode_dept
+            ]);
+
+            for($i = 0; $i < count($hari); $i++) {
+                $data[] = [
+                    'kode_jk_dept' => $kode_jk_dept,
+                    'hari' => $hari[$i],
+                    'kode_jam_kerja' => $kode_jam_kerja[$i]
+                ];
+            }
+            Setjamkerjadept::insert($data);
+            DB::commit();
+            return redirect('/konfigurasi/jamkerjadept')->with(['success' => 'Data Berhasil Disimpan']);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            dd($th);
+            return redirect('/konfigurasi/jamkerjadept')->with(['warning' => 'Data Gagal Disimpan']);
+        }
+    }
 
 
 }
